@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -10,7 +9,6 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import time
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -40,12 +38,10 @@ class PDFScraper:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         })
         
-        # Disable SSL warnings if we're not verifying certificates
         if not verify_ssl:
             import urllib3
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         
-        # Create output folder if it doesn't exist
         if not os.path.exists(output_folder):
             os.makedirs(output_folder)
             logging.info(f"Created output folder: {output_folder}")
@@ -291,7 +287,6 @@ def main():
     total_found = sum(year_data['total'] for year_data in summary.values())
     total_downloaded = sum(year_data['downloaded'] for year_data in summary.values())
     
-    # Print year-by-year breakdown
     print("\nYear-by-year breakdown:")
     for year in sorted(summary.keys(), reverse=True):
         data = summary[year]
